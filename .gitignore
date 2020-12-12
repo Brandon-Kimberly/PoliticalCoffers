@@ -1,2 +1,4 @@
 db.sqlite3
 visualizer/*.txt
+visualizer/__pycache__/
+politicalcoffers/__pycache__/
