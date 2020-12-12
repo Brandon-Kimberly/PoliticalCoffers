@@ -147,3 +147,6 @@ def load_data(request):
         file.close()
 
     return render(request, 'visualizer/base.html')
+
+def landing(request):
+    return render(request, 'visualizer/index.html')
