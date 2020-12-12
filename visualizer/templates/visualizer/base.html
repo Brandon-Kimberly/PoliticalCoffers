@@ -7,11 +7,12 @@
 <body>
 
 	<nav>
-		<li> <a href="{% url 'home' %}">Campaign Finance Home</a> </li>
-		<li> <a href="{% url 'earners-chart' %}">Top Earners Bar Graph</a> </li>
-		<li> <a href="{% url 'spending-pie' %}">Party Spending Pie Chart</a> </li>
-		<li> <a href="{% url 'donor-pie' %}">Donors Pie Chart</a> </li>
+		<a href="{% url 'home' %}">Campaign Finance Home</a> |
+		<a href="{% url 'spending-chart' %}">Top Spending Campaigns Bar Graph</a> |
+		<a href="{% url 'spending-pie' %}">Party Spending Pie Chart</a> |
+		<a href="{% url 'donor-pie' %}">Donors Pie Chart</a> 
 	</nav>
+	<hr/>
 
 	{% block content %}{% endblock %}
 

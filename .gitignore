@@ -2,3 +2,4 @@ db.sqlite3
 visualizer/*.txt
 visualizer/__pycache__/
 politicalcoffers/__pycache__/
+visualizer/migrations/__pycache__/

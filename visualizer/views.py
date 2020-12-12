@@ -8,9 +8,9 @@ import os
 import sys
 
 def home(request):
-    return render(request, 'visualizer/base.html')
+    return render(request, 'visualizer/home.html')
 
-def top_earners_chart(request):
+def top_spenders_chart(request):
     labels = []
     data = []
     try:
@@ -19,7 +19,7 @@ def top_earners_chart(request):
         yearp = "0000"
 
     if (yearp == "0000"):
-        queryset = Candidate.objects.values('name').annotate(total_earned=Sum('total_donation_amount')).order_by('-total_donation_amount')[:10]
+        queryset = Candidate.objects.values('name').annotate(total_earned=Sum('total_spent_amount')).order_by('-total_spent_amount')[:10]
     else:
         queryset = Candidate.objects.filter(year=yearp).values('name').annotate(total_earned=Sum('total_donation_amount')).order_by('-total_donation_amount')[:10]
 
@@ -32,10 +32,10 @@ def top_earners_chart(request):
         'data' : data,
         })
 
-def render_top_earners_chart(request):
+def render_top_spenders_chart(request):
     if (request.method == 'POST'):
         request.session['yeare'] = request.POST['year']
-    return render(request, 'visualizer/earning-chart.html')
+    return render(request, 'visualizer/spending-chart.html')
 
 def spending_pie(request):
     labels = []

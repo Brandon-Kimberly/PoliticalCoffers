@@ -3,10 +3,10 @@
 {% block content %}
 
 <div id="container" style="width: 75%;">
-    <canvas id="earners-chart-data" data-url="{% url 'earners-chart-data' %}"></canvas>
+    <canvas id="spending-chart-data" data-url="{% url 'spending-chart-data' %}"></canvas>
 </div>
 
-<form action="{% url 'earners-chart' %}" method="post">
+<form action="{% url 'spending-chart' %}" method="post">
     {% csrf_token %}
     <label for="cars">Choose an election year:</label>
     <select name="year" id="year">
@@ -45,19 +45,19 @@
 
     $(function () {
 
-        var $earnersChart = $("#earners-chart-data");
+        var $spendingChart = $("#spending-chart-data");
       $.ajax({
-          url: $earnersChart.data("url"),
+          url: $spendingChart.data("url"),
         success: function (data) {
 
-            var ctx = $earnersChart[0].getContext("2d");
+            var ctx = $spendingChart[0].getContext("2d");
 
           new Chart(ctx, {
             type: 'bar',
             data: {
               labels: data.labels,
               datasets: [{
-                label: 'Receipts in USD',
+                label: 'Money Spent in USD',
                 backgroundColor: 'green',
                 data: data.data
               }]
@@ -69,7 +69,7 @@
               },
               title: {
                 display: true,
-                  text: 'Total Money Receipts to top 10 US Federal Campaigns by Election Year'
+                  text: 'Total Money Disbursements from Top 10 US Federal Election Campaigns by Election Year'
               },
               tooltips: {
                 callbacks: {
@@ -109,13 +109,13 @@
                   },
                   scaleLabel: {
                     display: true,
-                    labelString: 'Sum Total Receipts in USD'
+                    labelString: 'Sum Total Disbursements in USD'
                   }
                 }],
                 xAxes: [{
                   scaleLabel: {
                     display: true,
-                    labelString: 'Campaign Name'
+                    labelString: 'Campaign Name and Year'
                   }
                 }]
               }
