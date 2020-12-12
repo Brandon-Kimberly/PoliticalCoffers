@@ -1,0 +1,62 @@
+{% extends 'visualizer/base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'donor-pie' %}" method="post">
+        {% csrf_token %}
+        <label for="directions">Choose amount in USD (between $0 and $10,000) to get ratio of individual donations over and under in election year 2020: </label>
+        <input name="target" type="number" id="quantity" name="quantity" min="0" max="10000" value="100">
+        <input type="submit" value="Submit">
+    </form>
+
+<div id="container" style="width: 75%;">
+    <canvas id="donors-pie-data" data-url="{% url 'donors-pie-data' %}"></canvas>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+    $(function () {
+
+        var $donorsPie = $("#donors-pie-data");
+        $.ajax({
+            url: $donorsPie.data("url"),
+            success: function (data) {
+                var ctx = $donorsPie[0].getContext("2d");
+
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.data,
+                            backgroundColor: [
+                                '#26b8d4', '#fa5655'
+                            ],
+                            label: 'Individual Donations Over and Under Target Amount in 2020 Election',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Individual Donations Over and Under Target Amount in 2020 Election'
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function (tooltipItem, data) {
+                                    var value = data.datasets[0].data[tooltipItem.index];
+                                    return value.toString();
+                                }
+                            }
+                        },
+                    },
+                });
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

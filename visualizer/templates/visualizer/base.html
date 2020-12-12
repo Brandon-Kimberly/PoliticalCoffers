@@ -1,0 +1,19 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}Campaign Finance Visualizer{% endblock %}</title>
+</head>
+<body>
+
+	<nav>
+		<li> <a href="{% url 'home' %}">Campaign Finance Home</a> </li>
+		<li> <a href="{% url 'earners-chart' %}">Top Earners Bar Graph</a> </li>
+		<li> <a href="{% url 'spending-pie' %}">Party Spending Pie Chart</a> </li>
+		<li> <a href="{% url 'donor-pie' %}">Donors Pie Chart</a> </li>
+	</nav>
+
+	{% block content %}{% endblock %}
+
+</body>
+</html>
